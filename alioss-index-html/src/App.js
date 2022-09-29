@@ -38,6 +38,8 @@ class App extends React.Component {
         let list = []
         if (device.os.name === 'iOS') {
           list = [...ipaList];
+        } if (device.os.name === 'iPadOS') {
+          list = [...ipaList];
         } else if (device.os.name === 'Android') {
           list = [...apkList];
         } else if (device.device.type === 'desktop') { // pc
@@ -67,7 +69,7 @@ class App extends React.Component {
   installApp () {
     const { current, device } = this.state;
     if (current) {
-      if (device.os.name === 'iOS') {
+      if (device.os.name === 'iOS' || device.os.name === 'iPadOS') {
         window.location.href = "itms-services://?action=download-manifest&url=" + current.domain + current.path + "manifest.plist";
         setTimeout(() => {
           this.setState({isInstalling: true})
